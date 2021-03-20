@@ -142,9 +142,17 @@ Or go to this [link](https://docs.docker.com/engine/install/) for the official w
 
 3. Run the process
 
-    ```
-    $ python init.py
-    ```
+    A. Create the DB 
+        
+        ```
+        $ python quearies/create_db.py
+        ```
+    
+    B. Run the ETL
+
+        ```
+        $ python init.py
+        ```
 
 
 
