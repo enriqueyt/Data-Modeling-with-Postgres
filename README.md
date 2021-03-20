@@ -127,9 +127,9 @@ Or go to this [link](https://docs.docker.com/engine/install/) for the official w
 
 1. Clone the repository
 
-```
-$ git clone https://github.com/enriqueyt/Data-Modeling-with-Postgres.git
-```
+    ```
+    $ git clone https://github.com/enriqueyt/Data-Modeling-with-Postgres.git
+    ```
 
 2. Up postgres
 
