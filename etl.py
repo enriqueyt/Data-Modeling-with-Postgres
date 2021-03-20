@@ -87,7 +87,7 @@ def process_data(cur, conn, filepath, func):
 
     # iterate over files and process
     for i, datafile in enumerate(all_files, 1):
-        func(cur, datafile)
+        func(cur, conn, datafile)
         conn.commit()
         print('{}/{} files processed.'.format(i, num_files))
 
@@ -96,8 +96,3 @@ def main(cur, conn):
 
     process_data(cur, conn, filepath='data/song_data', func=process_song_file)
     process_data(cur, conn, filepath='data/log_data', func=process_log_file)
-
-
-
-if __name__ == "__main__":
-    main()
