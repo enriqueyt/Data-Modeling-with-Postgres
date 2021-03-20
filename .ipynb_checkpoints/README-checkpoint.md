@@ -112,7 +112,8 @@ Or go to this [link](https://docs.docker.com/engine/install/) for the official w
                 └── C        
                     ├──          # Json file that contains metadata about a song and the artist of that song   
     ├── queries                 # Contains querys or the the project
-        ├── database            # create the database,run drop and create tables
+        ├── create_db           # create the database to worrk on
+        ├── database            # run drop and create tables
         ├── drop                # contains querys to drop tables
         ├── create              # contains querys to create tables
         ├── insert              # contains querys to drop tables

@@ -1,5 +1,4 @@
 import psycopg2
-from connection import getConnection
 
 def createDB():
 
