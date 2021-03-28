@@ -93,7 +93,8 @@ def process_log_file(cur, conn, filepath):
             songid, artistid = None, None
 
         # insert songplay record
-        songplay_data = (songid, t[index], row.userId, row.level, artistid, row.sessionId, row.location, row.userAgent)
+        
+        songplay_data = (t[index], row.userId, row.level, songid, artistid, row.sessionId, row.location, row.userAgent)
         cur.execute(insert.songplay_table_insert, songplay_data)
         conn.commit()
 

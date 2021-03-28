@@ -28,6 +28,7 @@ def drop_tables(cur, conn):
     Returns:
         void
     """
+    print("drop_table_queries")
     for query in drop_table_queries:
         cur.execute(query)
         conn.commit()
@@ -44,6 +45,7 @@ def create_tables(cur, conn):
     Returns:
         void
     """
+    print("create_table_queries")
     for query in create_table_queries:
         cur.execute(query)
         conn.commit()

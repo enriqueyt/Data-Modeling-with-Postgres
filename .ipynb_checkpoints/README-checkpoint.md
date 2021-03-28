@@ -146,7 +146,7 @@ Or go to this [link](https://docs.docker.com/engine/install/) for the official w
     A. Create the DB 
         
         ```
-        $ python quearies/create_db.py
+        $ python queries/create_db.py
         ```
     
     B. Run the ETL

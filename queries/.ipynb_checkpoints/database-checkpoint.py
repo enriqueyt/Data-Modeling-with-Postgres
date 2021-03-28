@@ -3,16 +3,14 @@ from .drop import drop_table_queries
 
 def build_database(cur, conn):
     """
-    - Drops (if exists) and Creates the sparkify database. 
-    
-    - Establishes connection with the sparkify database and gets
-    cursor to it.  
-    
-    - Drops all the tables.  
-    
-    - Creates all tables needed. 
-    
-    - Finally, closes the connection.
+    Build the database structure. it call function to drop and create tables
+
+    Args:
+        cur: Current cursor current from coonnection open.
+        conn: Current connection.
+
+    Returns:
+        void
     """
 
     drop_tables(cur, conn)
@@ -21,8 +19,16 @@ def build_database(cur, conn):
 
 def drop_tables(cur, conn):
     """
-    Drops each table using the queries in `drop_table_queries` list.
+    Iterate drop queries and execute them
+
+    Args:
+        cur: Current cursor current from coonnection open.
+        conn: Current connection.
+
+    Returns:
+        void
     """
+    print("drop_table_queries")
     for query in drop_table_queries:
         cur.execute(query)
         conn.commit()
@@ -30,8 +36,16 @@ def drop_tables(cur, conn):
 
 def create_tables(cur, conn):
     """
-    Creates each table using the queries in `create_table_queries` list. 
+    Iterate create queries and execute them
+
+    Args:
+        cur: Current cursor current from coonnection open.
+        conn: Current connection.
+
+    Returns:
+        void
     """
+    print("create_table_queries")
     for query in create_table_queries:
         cur.execute(query)
         conn.commit()

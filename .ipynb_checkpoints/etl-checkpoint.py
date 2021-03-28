@@ -4,7 +4,20 @@ import psycopg2
 import pandas as pd
 from queries import insert, select
 
+
 def process_song_file(cur, conn, filepath):
+    """
+    Process files witch contains songs in json format 
+
+    Args:
+        cur: Current cursor current from coonnection open.
+        conn: Current connection.
+        filepath: path where we will file the file
+
+    Returns:
+        void
+    """
+
     # open song file
     df = pd.read_json(filepath, lines = True)
 
@@ -18,6 +31,18 @@ def process_song_file(cur, conn, filepath):
 
 
 def process_log_file(cur, conn, filepath):
+    """
+    Process files witch contains logs in json format 
+
+    Args:
+        cur: Current cursor current from coonnection open.
+        conn: Current connection.
+        filepath: path where we will file the file
+
+    Returns:
+        void
+    """
+
     # open log file
     df = pd.read_json(filepath, lines = True)
 
@@ -68,12 +93,26 @@ def process_log_file(cur, conn, filepath):
             songid, artistid = None, None
 
         # insert songplay record
-        songplay_data = (songid, t[index], row.userId, row.level, artistid, row.sessionId, row.location, row.userAgent)
+        
+        songplay_data = (t[index], row.userId, row.level, songid, artistid, row.sessionId, row.location, row.userAgent)
         cur.execute(insert.songplay_table_insert, songplay_data)
         conn.commit()
 
 
 def process_data(cur, conn, filepath, func):
+    """
+    Process the data after reading it from files
+
+    Args:
+        cur: Current cursor current from coonnection open.
+        conn: Current connection.
+        filepath: path where we will file the file
+        func: function will read either sons or logs file
+
+    Returns:
+        void
+    """
+
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
@@ -87,17 +126,24 @@ def process_data(cur, conn, filepath, func):
 
     # iterate over files and process
     for i, datafile in enumerate(all_files, 1):
-        func(cur, datafile)
+        func(cur, conn, datafile)
         conn.commit()
         print('{}/{} files processed.'.format(i, num_files))
 
 
-def main(cur, conn):
+def main_etl(cur, conn):
+    """
+    Starting point to process the ETL, Here we will call function to process files
+
+    Args:
+        cur: Current cursor current from coonnection open.
+        conn: Current connection.
+
+    Returns:
+        void
+    """
 
     process_data(cur, conn, filepath='data/song_data', func=process_song_file)
     process_data(cur, conn, filepath='data/log_data', func=process_log_file)
 
-
-
-if __name__ == "__main__":
-    main()
+    conn.close()
